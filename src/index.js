@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const UserService = require('./services/user-service');
+const db = require('./models/index');
+const {User, Role} = require('./models/index');
 
 const { PORT } = require('./config/serverConfig');
 const apiRoutes = require('./routes/index');
@@ -18,8 +19,16 @@ const prepareAndStartServer = () => {
 
     app.listen(PORT, async() => {
         console.log(`Server started on port: ${PORT}`);
+        if(process.env.DB_SYNC) {
+            db.sequelize.sync({alter: true})
+        }
 
-        const service = new UserService();
+        //To add roles for user
+        const u1 = await User.findByPk(7);
+        const r1 = await Role.findByPk(1);
+        u1.addRole(r1); 
+
+        // const service = new UserService();
         // const newToken = service.createToken({email:'Jon@hotmail.com', id: 1});
         // console.log("New Token: ", newToken);
 
