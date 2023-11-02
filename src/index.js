@@ -24,9 +24,9 @@ const prepareAndStartServer = () => {
         }
 
         //To add roles for user
-        const u1 = await User.findByPk(7);
-        const r1 = await Role.findByPk(1);
-        u1.addRole(r1); 
+        // const u1 = await User.findByPk(7);
+        // const r1 = await Role.findByPk(1);
+        // u1.addRole(r1); 
 
         // const service = new UserService();
         // const newToken = service.createToken({email:'Jon@hotmail.com', id: 1});
